@@ -1,11 +1,11 @@
-package com.alint.springlearning.hibernatedemo;
+package com.alint.springlearning.hibernatedemo.main;
 
 import com.alint.springlearning.hibernatedemo.entities.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class CreateStudentDemo {
+public class PublicKeyDemo {
     public static void main(String[] args){
 
         SessionFactory factory = new Configuration()
@@ -16,12 +16,16 @@ public class CreateStudentDemo {
         Session session = factory.getCurrentSession();
         try{
             System.out.println("Creating a new student object...");
-            Student tempStudent = new Student("Alin","Tudose","alintudose126@gmail.com");
+            Student tempStudent1 = new Student("Cosmin","Onutu","onutuc@gmail.com");
+            Student tempStudent2 = new Student("Catalina","Mihailescu","catalinamihailescu@yahoo.com");
+            Student tempStudent3 = new Student("Emilian","Dumitru","d_emilian@yahoo.com");
 
             session.beginTransaction();
 
             System.out.println("Saving the student...");
-            session.save(tempStudent);
+            session.save(tempStudent1);
+            session.save(tempStudent2);
+            session.save(tempStudent3);
 
             session.getTransaction().commit();
 
@@ -31,6 +35,7 @@ public class CreateStudentDemo {
             e.printStackTrace();
         }
         finally{
+            session.close();
             factory.close();
         }
     }
